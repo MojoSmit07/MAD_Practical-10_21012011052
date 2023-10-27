@@ -11,5 +11,5 @@ import java.io.Serializable
         var latitude: Double,
         var longitude: Double) :Serializable {
 
-
     }
+
