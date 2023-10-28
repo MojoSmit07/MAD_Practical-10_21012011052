@@ -1,6 +1,7 @@
+package com.example.mad_practical_10_21012011052
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.mad_practical_10_21012011052.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
