@@ -1,6 +1,5 @@
 package com.example.mad_practical_10_21012011052
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
@@ -9,6 +8,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         try {
                             if (data != null)
-                                runOnUiThread { getPersonDetailsFromJson(data) }
+                                runOnUiThread{getPersonDetailsFromJson(data)}
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -51,6 +53,23 @@ class MainActivity : AppCompatActivity() {
             personListView.adapter = PersonAdapter(this, Array)
         }
     }
+
+    private fun getPersonDetailsFromJson(sJson: String) {
+        val personList = ArrayList<Person>()
+        try {
+            val jsonArray = JSONArray(sJson)
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray[i] as JSONObject
+                val person = Person(jsonObject)
+                personList.add(person)
+            }
+            val Personlistviewe=findViewById<ListView>(R.id.Listview1)
+            Personlistviewe.adapter = PersonAdapter(this, personList)
+        } catch (ee: JSONException) {
+            ee.printStackTrace()
+        }
+    }
+
 
 
 }
