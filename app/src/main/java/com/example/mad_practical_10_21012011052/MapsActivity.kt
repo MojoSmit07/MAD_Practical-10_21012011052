@@ -1,7 +1,6 @@
-package com.example.mad_practical_10_21012011052
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mad_practical_10_21012011052.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -43,6 +42,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f)) // 10 is your desired zoom level
     }
 }
