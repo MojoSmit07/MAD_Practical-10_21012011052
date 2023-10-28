@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         try {
                             if (data != null)
-                                runOnUiThread { getPersonDetailsFromJson(data) }
+                                runOnUiThread{getPersonDetailsFromJson(data)}
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -44,6 +44,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getPersonDetailsFromJson(sJson: String) {
+        val personList = ArrayList<Person>()
+        try {
+            val jsonArray = JSONArray(sJson)
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray[i] as JSONObject
+                val person = Person(jsonObject)
+                personList.add(person)
+            }
+            val Personlistviewe=findViewById<ListView>(R.id.Listview1)
+            Personlistviewe.adapter = PersonAdapter(this, personList)
+        } catch (ee: JSONException) {
+            ee.printStackTrace()
+        }
+    }
+
 
 
     private fun getPersonDetailsFromJson(sJson: String) {
