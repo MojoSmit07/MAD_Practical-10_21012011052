@@ -18,7 +18,7 @@ class PersonAdapter(context: Context, val PersonArray: ArrayList<Person>):ArrayA
         view.findViewById<TextView>(R.id.textView4).text = PersonArray[position].address
 
         view.findViewById<FloatingActionButton>(R.id.location_btn).setOnClickListener {
-            Intent(context, MapsActivity::class.java).putExtra("object", PersonArray[position]).apply { context.startActivity(this) }
+            Intent(context, MapsActivity::class.java).putExtra("Object", PersonArray[position]).apply { context.startActivity(this) }
         }
         return view
 

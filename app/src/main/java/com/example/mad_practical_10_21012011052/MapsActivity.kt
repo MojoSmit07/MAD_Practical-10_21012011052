@@ -1,6 +1,7 @@
+package com.example.mad_practical_10_21012011052
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.mad_practical_10_21012011052.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -9,11 +10,17 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.mad_practical_10_21012011052.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private var lat:Double = 0.0
+    private var log:Double = 0.0
+    private var title = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +45,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+        val sydney = LatLng(lat,  log )
+        mMap.addMarker(MarkerOptions().position(sydney)
+            .title(title)
+            .snippet(title)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.img2))
+        )
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-
-        // Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f)) // 10 is your desired zoom level
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 5f)) // 10 is your desired zoom level
     }
 }
