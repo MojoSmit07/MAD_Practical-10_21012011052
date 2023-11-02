@@ -27,11 +27,10 @@ class HttpRequest {
         } catch (e: IOException) {
             Log.e(TAG, "IOException: " + e.message)
         } catch (e: Exception) {
-            Log.e(TAG, "Exception: " + e.message)
+            Log.e(TAG, "Exception:" + e.message)
         }
         return response
     }
-
     private fun convertStreamToString(`is`: InputStream): String {
         val reader = BufferedReader(InputStreamReader(`is`))
         val sb = StringBuilder()

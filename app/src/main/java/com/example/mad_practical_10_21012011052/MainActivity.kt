@@ -12,27 +12,21 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var personListView : ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
-        val floatingBt = findViewById<FloatingActionButton>(R.id.floatingBt)
-
-        floatingBt.setOnClickListener {
-
+        val btn= findViewById<FloatingActionButton>(R.id.autorenew_btn)
+        btn.setOnClickListener(){
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val data = HttpRequest().makeServiceCall(
                         "https://api.json-generator.com/templates/qjeKFdjkXCdK/data",
-                        "rbn0rerl1k0d3mcwgw7dva2xuwk780z1hxvyvrb1"
-                    )
+                        "rbn0rerl1k0d3mcwgw7dva2xuwk780z1hxvyvrb1")
                     withContext(Dispatchers.Main) {
                         try {
-                            if (data != null)
+                            if(data != null)
                                 runOnUiThread{getPersonDetailsFromJson(data)}
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -45,9 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     private fun getPersonDetailsFromJson(sJson: String) {
         val personList = ArrayList<Person>()
         try {
@@ -57,14 +48,13 @@ class MainActivity : AppCompatActivity() {
                 val person = Person(jsonObject)
                 personList.add(person)
             }
-            val Personlistview = findViewById<ListView>(R.id.Listview1)
-            Personlistview.adapter = PersonAdapter(this, personList)
+            val personListView=findViewById<ListView>(R.id.listview_main)
+            personListView.adapter = PersonAdapter(this, personList)
         } catch (ee: JSONException) {
             ee.printStackTrace()
         }
     }
 }
-
 
 
 
